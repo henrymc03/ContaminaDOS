@@ -1,0 +1,366 @@
+﻿@model ProyectoRedes.Models.Player
+
+@{
+    ViewData["Title"] = "Index";
+    string error = TempData["Error"] as string;
+}
+
+
+<head>
+    <link rel="stylesheet" href="~/css/lobby.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/popupindex.css" asp-append-version="true" />
+    
+    <!-- Usando Google CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="~/lib/slick-1.8.1/slick/slick.min.js"></script>
+    <script src="~/js/script.js" asp-append-version="true"></script>
+    <script src="https://kit.fontawesome.com/b556477fb1.js" crossorigin="anonymous"></script>
+</head>
+
+
+<!--****************Parte izquierda*********************-->
+
+    <div class="first-container">
+        <div class="left-container">
+            <div class="centered-div">
+                
+                
+                @if (Model.gameEnded != null && Model.gameEnded.ended == true)
+                {
+                    <h1>El juego ha terminado, el ganador es = @Model.gameEnded.whoWin</h1>
+                    <a class="button" asp-controller="Home" asp-action="Index" />
+                }
+                else
+                {
+                    <h1>Nombre del juego: @Model.gameName</h1>
+                    @if (Model.owner != null)
+                    {
+                        <br />
+                        <br />
+                        <br />
+                        <h2>ContaminaDOS</h2>
+                        <h3>El owner es = @Model.owner </h3>
+                    }
+
+                    @if (Model.status != null)
+                    {
+                        <h3 id="statusGame">Juego en: @Model.status </h3>
+                    }
+                    @if (Model.result != null)
+                    {
+                        <h3> resultado = @Model.result</h3>
+                    }
+                    <h4 class="id" id="@Model.gameId">Comparte el juego con tus amigos:<br> @Model.gameId</h4>
+
+                    <div class="button-container">
+                        <a class="buttonrefresh" asp-area="" asp-controller="Game" asp-action="GetGameMethod" asp-route-gameId="@Model.gameId" asp-route-name="@Model.player" asp-route-password="@Model.password" asp-route-server="@Model.server">
+                            <span class="button__text">Actualizar</span>
+                            <span class="button__icon"><svg class="svg" height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M35.3 12.7c-2.89-2.9-6.88-4.7-11.3-4.7-8.84 0-15.98 7.16-15.98 16s7.14 16 15.98 16c7.45 0 13.69-5.1 15.46-12h-4.16c-1.65 4.66-6.07 8-11.3 8-6.63 0-12-5.37-12-12s5.37-12 12-12c3.31 0 6.28 1.38 8.45 3.55l-6.45 6.45h14v-14l-4.7 4.7z"></path><path d="M0 0h48v48h-48z" fill="none"></path></svg></span>
+                        </a>
+                    </div>
+                    <h3>Década actual: @Model.decade</h3>
+                    <h3> Este eres tu: @Model.player </h3>
+                }
+            </div>
+        </div>
+
+        <!-- Parte derecha -->
+        <div class="right-container">
+            <div class="centered-div">
+                <div>
+                    @if (Model.rounds != null)
+                {
+                    <table border="1" class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Ronda</th>
+                                <th scope="col">Resutado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @if (Model.rounds != null)
+                                {
+
+                                    @foreach (var item in Model.rounds)
+                                    {
+                                        <tr>
+                                        <td><h3>@item.round</h3></td>
+                                        
+                                            @if (item.result == "none")
+                                            {
+                                            <td>
+                                                <h3>En progreso</h3>
+                                                   
+                                            </td>
+                                            }
+                                            else
+                                            {
+                                            <td>
+                                                <h3>Resultado =  @item.result </h3>
+                                            </td>
+                                            }
+                                        </tr>
+                                    }
+                                }
+                            </tr>
+                        </tbody>
+
+                    </table>
+                }
+            </div>
+                <div>
+                    @if (Model.group != null && Model.votes != null && Model.status != null && Model.leader != null)
+                    {
+                        <h3>Grupo elegido:</h3>
+                        @foreach (var item in Model.group)
+                        {
+                            <h3>@item.ToString()</h3>
+                        }
+                        <h3>Votación:</h3>
+                        @foreach (var item in Model.votes)
+                        {
+                            <h3>@item.ToString()</h3>
+                        }
+                        <!-- <h2>Leader:  @Model.leader</h2>
+                        <h2>status: @Model.status</h2> -->
+                    }
+                </div>
+
+                @if (Model.owner != null)
+                {
+                    @if (Model.player == Model.owner && Model.decade == 0)
+                    {
+                        <label id="@Model.player" class="pass"></label>
+                        <label id="@Model.password" class="name"></label>
+                        @if (Model.otherPlayers.Count() >= 5)
+                        {
+                            <br />
+                            <button>
+                                <!--class="btn-start"-->
+                                <a asp-area="" asp-controller="Game" asp-action="StartGame" asp-route-gameId="@Model.gameId"
+                                   asp-route-player="@Model.player" asp-route-password="@Model.password" asp-route-server="@Model.server">A jugar!</a>
+                            </button>
+                        }
+                    }
+                }
+                <div class="containter-btn">
+                    @if ((Model.status != null && @Model.status != "lobby"))
+                    {
+
+                        @if (Model.player == Model.leader && Model.status == "waiting-on-leader")
+                        {
+                            <button>
+                                <a asp-area="" asp-controller="Game" asp-action="ProposeGroupMethod"
+                                   asp-route-decade="@Model.decade" asp-route-password="@Model.password"
+                                   asp-route-gameId="@Model.gameId" asp-route-player="@Model.player"
+                                   asp-route-server="@Model.server">Escoge el grupo!</a>
+                            </button>
+                        }
+
+                        @if (Model.group != null)
+                        {
+                            @if (Model.group.Count > 0 && Model.status == "voting")
+                            {
+
+                                <button id="voteButton">Votar!</button>
+                            }
+                        }
+
+                        @if (Model.status != null && Model.group != null)
+                        {
+                            @if (Model.status == "waiting-on-group")
+                            {
+                                @foreach (var item in Model.group)
+                                {
+                                    @if (Model.player == item)
+                                    {
+                                        <button id="actionButton">Tomar Acción!</button>
+
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Parte de abajo -->
+    <div class="bottom-container">
+        <div class="centered-below">
+            <div>
+                <h3> Jugadores en la partida: </h3>
+            </div>
+            <div class="playersView">
+                @foreach (var item in Model.otherPlayers)
+                {
+                    <div class="card">
+                        <h2>@item.name</h2>
+                        @if (item.isEnemy == true)
+                        {
+                            <h2>Psicópata</h2>
+                        }
+                        else
+                        {
+                            <h2>Ejemplar</h2>
+                        }
+                        @if (Model.leader != null && Model.leader == item.name)
+                        {
+                            <h2>Líder</h2>
+                        }
+                    </div>
+                    <br />
+                }
+            </div>
+        </div>
+    </div>
+
+    <!-- Modales -->
+    <div id="voteModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p class="cookieHeading">¿Aceptas el grupo?</p>
+            <div class="buttonContainer">
+                <form asp-action="Vote" asp-controller="Game" method="post">
+                    <input type="hidden" asp-for="gameId" />
+                    <input type="hidden" asp-for="player" />
+                    <input type="hidden" asp-for="password" />
+                    <input type="hidden" asp-for="server" />
+
+                    <button class="acceptButton" type="submit" name="vote" value="true">Sí</button>
+                    <button class="declineButton" type="submit" name="vote" value="false">No</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para tomar acción por el grupo -->
+    <div id="actionModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <p class="cookieHeading">¿Qué acción tomas?</p>
+            <div class="buttonContainer">
+                <form asp-action="Action" asp-controller="Game" method="Post">
+                    <input type="hidden" asp-for="gameId" />
+                    <input type="hidden" asp-for="player" />
+                    <input type="hidden" asp-for="password" />
+                    <input type="hidden" asp-for="server" />
+                    <button class="acceptButton" type="submit" name="action" value="true">Aportar</button>
+                    <button class="declineButton" type="submit" name="action" value="false">Sabotear</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modales adicionales (ViewBag.Message y error) -->
+    @if (ViewBag.Message != null)
+    {
+        <div id="errorModal" class="modal">
+            <div class="modal-content">
+                <p class="cookieHeading">@ViewBag.Message</p>
+                <div class="buttonContainer">
+                    <button class="acceptButton">OK</button>
+                </div>
+            </div>
+        </div>
+    }
+    @if (error != null)
+    {
+        <div id="errorModal" class="modal">
+            <div class="modal-content">
+                <p class="cookieHeading">@error</p>
+                <div class="buttonContainer">
+                    <button class="acceptButton">OK</button>
+                </div>
+            </div>
+        </div>
+    }
+</>
+
+
+
+<!--*******tERMINA EL ELSE*************-->
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+
+        var playerName = localStorage.getItem('playerName');
+        $('#jugadorActual').text(playerName);
+        // Selecciona el elemento <h1> por su id y establece su contenido con el valor obtenido de localStorage
+       
+            // Maneja el clic en el botón "Vote" para mostrar el modal
+            $("#voteButton").click(function () {
+                // Muestra el modal
+                $("#voteModal").show();
+            });
+
+            // Maneja el clic en los botones "A favor" o "En contra"
+            $(".acceptButton, .declineButton").click(function () {
+                // Oculta el modal cuando se selecciona una opción
+                $("#voteModal").hide();
+                $("#voteButton").hide();
+            });
+
+             $(".acceptButton").click(function () {
+            // Muestra el modal
+                $("#errorModal").hide();
+            });
+        });
+    </script>
+   
+
+    <script>
+        $(document).ready(function () {
+
+            
+            // Maneja el clic en el botón "Action" para mostrar el modal
+            $("#actionButton").click(function () {
+                // Muestra el modal
+                $("#actionModal").show();
+            });
+
+            // Maneja el clic en los botones 
+            $(".acceptButton, .declineButton").click(function () {
+                // Oculta el modal cuando se selecciona una opción
+                $("#actionModal").hide();
+                $("#actionButton").hide();
+            });
+        });
+    </script>
+
+    <script>
+        $.ajax({
+            //Llama el User/SetRate del controller
+            url: '/Game/GetMethod',
+            type: 'POST',
+            data: dato,
+            success: function (response) {
+                // Manejar la respuesta del ActionResult
+                console.log(response);
+            },
+            error: function (error) {
+                // Manejar errores en la solicitud Ajax
+                console.log(error);
+            }
+        });
+    </script>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+   

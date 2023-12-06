@@ -1,0 +1,54 @@
+﻿@model ProyectoRedes.Models.ShowRounds
+
+@{
+    ViewData["Title"] = "ShowRounds";
+}
+
+<h1>ShowRounds</h1>
+
+<h4>ShowRounds</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ShowRounds">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="gameId" class="control-label"></label>
+                <input asp-for="gameId" class="form-control" />
+                <span asp-validation-for="gameId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="roundId" class="control-label"></label>
+                <input asp-for="roundId" class="form-control" />
+                <span asp-validation-for="roundId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="password" class="control-label"></label>
+                <input asp-for="password" class="form-control" />
+                <span asp-validation-for="password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="player" class="control-label"></label>
+                <input asp-for="player" class="form-control" />
+                <span asp-validation-for="player" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Show" class="btn btn-primary" />
+            </div>
+        </form>
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-info">
+                @ViewBag.Message
+            </div>
+        }
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

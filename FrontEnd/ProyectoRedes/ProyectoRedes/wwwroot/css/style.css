@@ -1,0 +1,55 @@
+﻿
+.btn{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.btnR {
+    display: flex; /* Use flexbox to horizontally align the button */
+    justify-content:flex-end;
+}
+.btnR button{
+    font-size:50px;
+    border-radius: 10px;
+    background-color:transparent;
+    border-color:transparent;
+    margin-left: 100px;
+}
+i{
+    max-height: 50px;
+}
+i .material-icons{
+    width: 100px;
+    height: 50px;
+}
+.options-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+}
+
+    .options-menu button {
+        font-size: 30px; /* Adjust the font size as needed */
+        margin-left: 50px;
+        padding: 10px 20px; /* Adjust the padding as needed */
+        background-color: #007bff; /* Button background color */
+        color: white; /* Text color */
+        border: none; /* Remove the default button border */
+        border-radius: 5px; /* Add rounded corners */
+        cursor: pointer; /* Add a pointer cursor on hover */
+        font-family: "Lucida Console", "Courier New", monospace;
+        width:250px;
+        height: 150px;
+
+    }
+
+
+    .options-menu button:hover {
+        background-color: #0056b3; /* Change the background color on hover */
+    }
+.container-btn {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

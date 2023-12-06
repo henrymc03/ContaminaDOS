@@ -1,0 +1,313 @@
+﻿@model ProyectoRedes.Models.ModelGroup
+
+@{
+    ViewData["Title"] = "ProposeGroup";
+}
+<head>
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+</head>
+<hr />
+
+@using (Html.BeginForm("ProposeGroupMethod", "Game", FormMethod.Post))
+{
+     @Html.AntiForgeryToken() <!-- Add anti-forgery token for security -->
+    <style>
+       
+    </style>
+    <input type="hidden" asp-for="gameId" value="@Model.gameId" />
+    <input type="hidden" asp-for="player" value="@Model.player" />
+    <input type="hidden" asp-for="roundId" value="@Model.roundId" />
+    <input type="hidden" asp-for="password" value="@Model.password" />
+    <input type="hidden" asp-for="server" value="@Model.server" />
+
+    string valid = "";
+    @if(Model.decade == 1)
+    {
+        if (Model.otherPlayers.Count == 5 || Model.otherPlayers.Count == 6 || Model.otherPlayers.Count == 7)
+        {
+            <div class="form-container">
+                <div class="form-group">
+                <h5>Proponer Grupo</h5>
+                @for (int i = 0; i < 2; i++)
+                {
+                        <select id="selection" class="form-select" name="groups[@i]" arial-label="Players">
+                    @foreach (var player in Model.otherPlayers)
+                    {
+                                <option value="@player">@player</option>
+                        
+                    }
+                </select>
+                }
+                <button class="form-submit-btn" type="submit">Grupo</button>
+                </div>
+             </div>
+           
+        }
+        else if (Model.otherPlayers.Count == 8 || Model.otherPlayers.Count == 9 || Model.otherPlayers.Count == 10)
+        {
+
+            <div class="form-container">
+                <div class="form-group">
+                <h5>Proponer Grupo</h5>
+            @for (int i = 0; i < 3; i++)
+            {
+                        <select id="selection" class="form-select" name="groups[@i]" arial-label="Players">
+                    @foreach (var player in Model.otherPlayers)
+                    {
+                        <option value="@player">@player</option>
+                    }
+                </select>
+            }
+                    <button class="form-submit-btn" type="submit">Grupo</button>
+                </div>
+            </div>
+        }
+    }
+    else if (Model.decade == 2)
+    {
+        if (Model.otherPlayers.Count == 5 || Model.otherPlayers.Count == 6 || Model.otherPlayers.Count == 7)
+        {
+            <div class="form-container">
+                <div class="form-group">
+                <h5>Proponer Grupo</h5>
+            @for (int i = 0; i < 3; i++)
+            {
+                        <select id="selection" class="form-select" name="groups[@i]" arial-label="Players">
+                    @foreach (var player in Model.otherPlayers)
+                    {
+                        <option value="@player">@player</option>
+                    }
+                </select>
+            }
+                    <button class="form-submit-btn" type="submit">Grupo</button>
+                </div>
+            </div>
+
+        }
+        else if (Model.otherPlayers.Count == 8 || Model.otherPlayers.Count == 9 || Model.otherPlayers.Count == 10)
+        {
+            <div class="form-container">
+                <div class="form-group">
+                <h5>Proponer Grupo</h5>
+            @for (int i = 0; i < 4; i++)
+            {
+                        <select id="selection" class="form-select" name="groups[@i]" arial-label="Players">
+                    @foreach (var player in Model.otherPlayers)
+                    {
+                        <option value="@player">@player</option>
+                    }
+                </select>
+            }
+                    <button class="form-submit-btn" type="submit">Grupo</button>
+                </div>
+            </div>
+
+        }
+    }
+
+
+    @if(Model.decade == 3)
+    {
+        if (Model.otherPlayers.Count == 5)
+        {
+             <div class="form-container">
+                <div class="form-group">
+                <h5>Proponer Grupo</h5>
+            @for (int i = 0; i < 2; i++)
+            {
+                        <select id="selection" class="form-select" name="groups[@i]" arial-label="Players">
+                    @foreach (var player in Model.otherPlayers)
+                    {
+                        <option value="@player">@player</option>
+                    }
+                </select>
+            }
+                    <button class="form-submit-btn" type="submit">Grupo</button>
+                </div>
+            </div>
+
+        }
+        else if (Model.otherPlayers.Count == 6 || Model.otherPlayers.Count == 8 || Model.otherPlayers.Count == 9 || Model.otherPlayers.Count == 10)
+        {
+            <div class="form-container">
+                <div class="form-group">
+                <h5>Proponer Grupo</h5>
+            @for (int i = 0; i < 4; i++)
+            {
+                        <select id="selection" class="form-select" name="groups[@i]" arial-label="Players">
+                    @foreach (var player in Model.otherPlayers)
+                    {
+                        <option value="@player">@player</option>
+                    }
+                </select>
+            }
+                    <button class="form-submit-btn" type="submit">Grupo</button>
+                </div>
+            </div>
+        }
+        else if (Model.otherPlayers.Count == 7)
+        {
+            <div class="form-container">
+                <div class="form-group">
+                <h5>Proponer Grupo</h5>
+            @for (int i = 0; i < 3; i++)
+            {
+                        <select id="selection" class="form-select" name="groups[@i]" arial-label="Players">
+                    @foreach (var player in Model.otherPlayers)
+                    {
+                        <option value="@player">@player</option>
+                    }
+                </select>
+            }
+                    <button class="form-submit-btn" type="submit">Grupo</button>
+                </div>
+            </div>
+
+        }
+    }
+    
+    @if(Model.decade == 4)
+    {
+        if (Model.otherPlayers.Count == 5 || Model.otherPlayers.Count == 6)
+        {
+            <div class="form-container">
+                <div class="form-group">
+                <h5>Proponer Grupo</h5>
+            @for (int i = 0; i < 3; i++)
+            {
+                        <select id="selection" class="form-select" name="groups[@i]" arial-label="Players">
+                    @foreach (var player in Model.otherPlayers)
+                    {
+                        <option value="@player">@player</option>
+                    }
+                </select>
+            }
+                    <button class="form-submit-btn" type="submit">Grupo</button>
+                </div>
+            </div>
+
+
+        }
+        else if (Model.otherPlayers.Count == 7)
+        {
+            <div class="form-container">
+                <div class="form-group">
+                <h5>Proponer Grupo</h5>
+            @for (int i = 0; i < 4; i++)
+            {
+                        <select id="selection" class="form-select" name="groups[@i]" arial-label="Players">
+                    @foreach (var player in Model.otherPlayers)
+                    {
+                        <option value="@player">@player</option>
+                    }
+                </select>
+            }
+                    <button class="form-submit-btn" type="submit">Grupo</button>
+                </div>
+            </div>
+
+        }
+        else if (Model.otherPlayers.Count == 8 || Model.otherPlayers.Count == 9 || Model.otherPlayers.Count == 10)
+        {
+            <div class="form-container">
+                <div class="form-group">
+                <h5>Proponer Grupo</h5>
+            @for (int i = 0; i < 5; i++)
+            {
+                        <select id="selection" class="form-select" name="groups[@i]" arial-label="Players">
+                    @foreach (var player in Model.otherPlayers)
+                    {
+                        <option value="@player">@player</option>
+                    }
+                </select>
+            }
+                    <button class="form-submit-btn" type="submit">Grupo</button>
+                </div>
+            </div>
+
+        }
+    }
+
+    @if (Model.decade == 5)
+    {
+        if (Model.otherPlayers.Count == 5)
+        {
+             <div class="form-container">
+                <div class="form-group">
+                <h5>Proponer Grupo</h5>
+            @for (int i = 0; i < 3; i++)
+            {
+                        <select id="selection" class="form-select" name="groups[@i]" arial-label="Players">
+                    @foreach (var player in Model.otherPlayers)
+                    {
+                        <option value="@player">@player</option>
+                    }
+                </select>
+            }
+                    <button class="form-submit-btn" type="submit">Grupo</button>
+                </div>
+            </div>
+
+        }
+        else if (Model.otherPlayers.Count == 6 || Model.otherPlayers.Count == 7)
+        {
+            <div class="form-container">
+                <div class="form-group">
+                <h5>Proponer Grupo</h5>
+            @for (int i = 0; i < 4; i++)
+            {
+                        <select id="selection" class="form-select" name="groups[@i]" arial-label="Players">
+                    @foreach (var player in Model.otherPlayers)
+                    {
+                        <option value="@player">@player</option>
+                    }
+                </select>
+            }
+                    <button class="form-submit-btn" type="submit">Grupo</button>
+                </div>
+            </div>
+
+        }
+        else if (Model.otherPlayers.Count == 8 || Model.otherPlayers.Count == 9 || Model.otherPlayers.Count == 10)
+        {
+             <div class="form-container">
+                <div class="form-group">
+                <h5>Proponer Grupo</h5>
+            @for (int i = 0; i < 5; i++)
+            {
+                        <select id="selection" class="form-select" name="groups[@i]" arial-label="Players">
+                    @foreach (var player in Model.otherPlayers)
+                    {
+                        <option value="@player">@player</option>
+                    }
+                </select>
+            }
+                    <button class="form-submit-btn" type="submit">Grupo</button>
+                </div>
+            </div>
+        }
+    }
+
+    
+
+}
+              
+                
+     
+        @if (ViewBag.Message != null)
+        {
+            <div class="alert alert-info">
+                @ViewBag.Message
+            </div>
+        }
+
+
+
+@section Scripts {
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

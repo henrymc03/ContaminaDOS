@@ -1,0 +1,163 @@
+﻿@model ProyectoRedes.Models.GetGame
+
+@{
+    ViewData["Title"] = "GetGame";
+    string server = TempData["Server"] as string;
+    string playerR = TempData["Player"] as string;
+}
+
+<head>
+    <link rel="stylesheet" href="~/css/home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/popup.css" asp-append-version="true" />
+</head>
+
+<div class="form-container">
+    <form class="form flexForm" asp-action="GetGame">
+        <input type="hidden" name="server" value="@server" />
+        <input type="hidden" name="username" value="@playerR" />
+        <h5>Ver todos los juegos</h5>
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="name">Nombre del Juego:</label>
+            <input asp-for="name" type="text" id="name" name="name" />
+            <span asp-validation-for="name" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="status">Estado del Juego:</label>
+            <select asp-for="status">
+                <option asp-for="status" value="" id="status">---</option>
+                <option asp-for="status" value="lobby" id="status">lobby</option>
+                <option asp-for="status" value="rounds" id="status">rounds</option>
+                <option asp-for="status" value="ended" id="status">ended</option>
+            </select>
+            <span asp-validation-for="status" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="page">Cantidad de Páginas:</label>
+            <input asp-for="page" type="number" id="page" name="page" value="0" />
+            <span asp-validation-for="page" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="limit">Límite de la Página:</label>
+            <input asp-for="limit" type="number" id="limit" name="limit" value="50" />
+            <span asp-validation-for="limit" class="text-danger"></span>
+        </div>
+        <button class="form-submit-btn" value="GetGame" type="submit">Obtener Partidas</button>
+
+    </form>
+</div>
+
+
+@if (ViewBag.Data != null)
+{
+    int i = 0;
+    <table border="1" class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Contraseña</th>
+                <th scope="col">Ronda Actual</th>
+                <th scope="col">Jugadores</th>
+                <th scope="col">Enemigos</th>
+                <th scope="col">Unirse</th>
+            </tr>
+        </thead>
+        @foreach (var item in ViewBag.Data.data)
+        {
+            <tbody>
+                <tr>
+                    
+                    <td>@item.id</td>
+                    <td>@item.name</td>
+                    <td>@item.status</td>
+                    <td>@item.password</td>
+                    <td>@item.currentRound</td>
+                    <td>
+                        <select class="form-select" aria-label="Players">
+                            @foreach (var player in item.players)
+                            {
+                                <option>@player</option>
+                            }
+                        </select>
+                            
+                    </td>
+                    <td>
+                        <select class="form-select" aria-label="Enemies">
+                            
+                            @foreach (var player in item.enemies)
+                            {
+                                <option>@player</option>
+                                
+                            }
+                        </select>      
+                    </td>
+                    <td>
+                            @if (item.status == "lobby")
+                            {
+                                <a data-text="Awesome" class="button" asp-area="" asp-controller="Game" asp-action="JoinGame"
+                                asp-route-server="@server" asp-route-id="@item.id" asp-route-username="@playerR">
+                                    Unirse a partida
+                                </a>
+                            }
+      
+                    </td>
+                    
+                    
+                </tr>
+            </tbody>
+        }
+    </table>
+}
+else
+{
+    @if (ViewBag.Message != null)
+    {
+        <div id="errorModal" class="modal">
+            <div class="modal-content">
+                <p class="cookieHeading">@ViewBag.Message</p>
+                <div class="buttonContainer">
+                    <button class="acceptButton">OK</button>
+                </div>
+            </div>
+        </div>
+
+    }
+}
+
+<div>
+    <a class="button" asp-controller="Game" asp-action="Options" asp-route-server="@server" asp-route-player="@playerR">
+        <div class="button-box">
+            <span class="button-elem">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 46 40">
+                    <path d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
+                </svg>
+            </span>
+            <span class="button-elem">
+                <svg viewBox="0 0 46 40">
+                    <path d="M46 20.038c0-.7-.3-1.5-.8-2.1l-16-17c-1.1-1-3.2-1.4-4.4-.3-1.2 1.1-1.2 3.3 0 4.4l11.3 11.9H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h33.1l-11.3 11.9c-1 1-1.2 3.3 0 4.4 1.2 1.1 3.3.8 4.4-.3l16-17c.5-.5.8-1.1.8-1.9z"></path>
+                </svg>
+            </span>
+        </div>
+    </a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Mostrar el modal cuando ViewBag.Message no sea null
+        if ("@ViewBag.Message" != null) {
+            $("#errorModal").show();
+        }
+
+        // Ocultar el modal al hacer clic en el botón OK
+        $(".acceptButton").click(function () {
+            $("#errorModal").hide();
+        });
+    });
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

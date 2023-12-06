@@ -1,0 +1,60 @@
+﻿
+@{
+    string username = TempData["Username"] as string;
+    string server = TempData["Server"] as string;
+}
+<head>
+    <link rel="stylesheet" href="~/css/options.css" asp-append-version="true" />
+</head>
+<div class="message-container">
+    @if (!string.IsNullOrEmpty(username))
+    {
+        <h2>Bienvenido "@username". Selecciona el modo de juego</h2>
+        <hr />
+    }
+</div>
+<body>
+    <!--   <div class="options-menu"> -->
+    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+
+        <ul class="navbar-nav flex-grow-1">
+
+  
+            <a data-text="Awesome" class="button" asp-area="" asp-controller="Game" asp-action="Create" asp-route-username="@username" asp-route-server="@server">
+                <span class="actual-text">&nbsp;1. Crear un Juego&nbsp;</span>
+                <span class="hover-text" aria-hidden="true">&nbsp;1. Crear un Juego&nbsp;</span>
+            </a>
+   
+            <br />
+
+
+
+            <a data-text="Awesome" class="button" asp-area="" asp-controller="Game" asp-action="GetGame" asp-route-server="@server" asp-route-player="@username">
+            <span class="actual-text">&nbsp;2. Ver los juegos&nbsp;</span>
+            <span class="hover-text" aria-hidden="true">&nbsp;2. Ver los juegos&nbsp;</span>
+        </a>
+        <br />
+
+       
+            <a data-text="Awesome" class="button" asp-area="" asp-controller="Game" asp-action="JoinGame" asp-route-username="@username" asp-route-server="@server">
+                <span class="actual-text">&nbsp;3. Unirme a una partida&nbsp;</span>
+                <span class="hover-text" aria-hidden="true">&nbsp;3. Unirme a una partida&nbsp;</span>
+            </a>
+            <br />
+            
+
+
+            </ul>
+      </div>
+
+    @if (ViewBag.messageBad != null)
+    {
+        <div class="card text-white bg-danger mb-3" style="max-width: 18rem;">
+            <div class="card-header">Error</div>
+            <div class="card-body">
+                <h5 class="card-title">@ViewBag.messageBad</h5>
+            </div>
+        </div>
+    }
+  
+</body>

@@ -1,0 +1,58 @@
+﻿@model ProyectoRedes.Models.Data
+
+@{
+    ViewData["Title"] = "ShowGames";
+    string server = TempData["Server"] as string;
+}
+
+<h1>ShowGames</h1>
+@if (Model.data != null) {
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Estado</th>
+                <th>Contraseña</th>
+                <th>Ronda Actual</th>
+                <th>Jugadores</th>
+                <th>Enemigos</th>
+                <th>Unirse</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.data) {
+            <tbody>
+                <tr>
+                    <td>@item.id</td>
+                    <td>@item.name</td>
+                    <td>@item.status</td>
+                    <td>@item.password</td>
+                    <td>@item.currentRound</td>
+                    <td>
+                        @foreach (var player in item.players)
+                        {
+                            @player
+                        }
+                    </td>
+                    <td>
+                        @foreach (var player in item.enemies)
+                        {
+                            @player
+                        }
+                    </td>
+                    <td>
+                        <a data-text="Awesome" class="button" asp-area="" asp-controller="Game" asp-action="JoinGame" 
+                        asp-route-server="@server" asp-route-id="@item.id">
+                            Unirse a partida
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+}
+else
+{
+    <h2>No hay datos!!</h2>
+}
+

@@ -1,0 +1,211 @@
+﻿.button-container {
+    display: inline-block;
+    align-items: center; /* Centra verticalmente */
+    justify-content: flex-end; /* Alinea elementos al extremo derecho */
+    /* Otros estilos para el contenedor si es necesario */
+}
+
+.buttonrefresh {
+    display: flex; /* Centra verticalmente */
+    justify-content: space-between; /* Distribuye elementos a lo largo del contenedor */
+    margin-right: 20px;
+    --main-focus: #2d8cf0;
+    --font-color: #dedede;
+    --bg-color-sub: #222;
+    --bg-color: #323232;
+    --main-color: #dedede;
+    position: relative;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--main-color);
+    box-shadow: 4px 4px var(--main-color);
+    background-color: var(--bg-color);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.buttonrefresh, .button__icon, .button__text {
+    transition: all 0.3s;
+}
+
+    .buttonrefresh .button__text {
+        transform: translateX(33px);
+        color: var(--font-color);
+        font-weight: 600;
+    }
+
+    .buttonrefresh .button__icon {
+        position: absolute;
+        transform: translateX(109px);
+        height: 100%;
+        width: 39px;
+        background-color: var(--bg-color-sub);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .buttonrefresh .svg {
+        width: 20px;
+        fill: var(--main-color);
+    }
+
+    .buttonrefresh:hover {
+        background: var(--bg-color);
+    }
+
+        .buttonrefresh:hover .button__text {
+            color: transparent;
+        }
+
+        .buttonrefresh:hover .button__icon {
+            width: 148px;
+            transform: translateX(0);
+        }
+
+    .buttonrefresh:active {
+        transform: translate(3px, 3px);
+        box-shadow: 0px 0px var(--main-color);
+    }
+
+
+.card {
+    width: 190px;
+    height: 254px;
+    background: #07182E;
+    position: relative;
+    display: flex;
+    margin-right: 20px;
+    place-content: center;
+    place-items: center;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+    .card h2 {
+        z-index: 1;
+        color: white;
+        font-size: 2em;
+    }
+
+    .card::before {
+        content: '';
+        position: absolute;
+        width: 100px;
+        background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+        height: 130%;
+        animation: rotBGimg 3s linear infinite;
+        transition: all 0.2s linear;
+    }
+
+@keyframes rotBGimg {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    background: #07182E;
+    ;
+    inset: 5px;
+    border-radius: 15px;
+}
+/* .card:hover:before {
+  background-image: linear-gradient(180deg, rgb(81, 255, 0), purple);
+  animation: rotBGimg 3.5s linear infinite;
+} */
+
+button {
+    --purple: #9B7EDA;
+    font-size: 18px;
+    padding: 0.8em 3em;
+    letter-spacing: 0.08em;
+    position: relative;
+    font-family: inherit;
+    border-radius: 0.6em;
+    overflow: hidden;
+    transition: all 0.3s;
+    line-height: 1.4em;
+    border: 2px solid var(--purple);
+    background: linear-gradient(to right, rgba(155, 126, 218, 0.1) 1%, transparent 40%, transparent 60%, rgba(155, 126, 218, 0.1) 100%);
+    color: var(--purple);
+    box-shadow: inset 0 0 10px rgba(155, 126, 218, 0.4), 0 0 9px 3px rgba(155, 126, 218, 0.1);
+}
+
+    button:hover {
+        color: #BFA3F3;
+        box-shadow: inset 0 0 10px rgba(155, 126, 218, 0.6), 0 0 9px 3px rgba(155, 126, 218, 0.2);
+    }
+
+    button:before {
+        content: "";
+        position: absolute;
+        left: -4em;
+        width: 4em;
+        height: 100%;
+        top: 0;
+        transition: transform .4s ease-in-out;
+        background: linear-gradient(to right, transparent 1%, rgba(155, 126, 218, 0.1) 40%, rgba(155, 126, 218, 0.1) 60%, transparent 100%);
+    }
+
+    button:hover:before {
+        transform: translateX(15em);
+    }
+
+.outer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    text-align: center;
+
+}
+
+.first-container {
+    display: flex;
+    /* Por defecto, los elementos hijos se mostrarán en fila (horizontalmente) */
+}
+
+.left-container,
+.right-container {
+    flex: 1; /* Ambos contenedores tomarán el mismo espacio */
+    border: 1px solid #ccc; /* Añadir un borde para mayor claridad */
+    padding: 10px; /* Agregar relleno para espaciado */
+}
+
+
+.centered-div {
+    display: flex;
+    flex-direction: column; /* Cambiar la dirección a columna para apilar elementos */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    height: 100%; /* Utilizar altura del contenedor padre */
+}
+
+
+.bottom-container {
+    margin-top: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+}
+
+
+Este código HTML coloca los tres bloques de contenido dentro de un contenedor principal llamado "container". Luego, aplicamos CSS para que se muestren en forma de columna con margen y estilo de borde opcional.
+
+Ajusta los estilos CSS según tus preferencias de diseño. Esto debería lograr el diseño que estás buscando con los tres bloques de contenido uno debajo del otro.
+
+
+
+
+
+
