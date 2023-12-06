@@ -1,0 +1,103 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\nacho\\Desktop\\IF6000 Redes en los negocios\\backend\\API-contaminaDOS\\API-Redes2\\API_ContaminaDOS\\API_ContaminaDOS\\API_ContaminaDOS.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\nacho\\Desktop\\IF6000 Redes en los negocios\\backend\\API-contaminaDOS\\API-Redes2\\API_ContaminaDOS\\API_ContaminaDOS\\API_ContaminaDOS.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\nacho\\Desktop\\IF6000 Redes en los negocios\\backend\\API-contaminaDOS\\API-Redes2\\API_ContaminaDOS\\API_ContaminaDOS\\API_ContaminaDOS.csproj",
+        "projectName": "API_ContaminaDOS",
+        "projectPath": "C:\\Users\\nacho\\Desktop\\IF6000 Redes en los negocios\\backend\\API-contaminaDOS\\API-Redes2\\API_ContaminaDOS\\API_ContaminaDOS\\API_ContaminaDOS.csproj",
+        "packagesPath": "C:\\Users\\nacho\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\nacho\\Desktop\\IF6000 Redes en los negocios\\backend\\API-contaminaDOS\\API-Redes2\\API_ContaminaDOS\\API_ContaminaDOS\\obj\\publish\\linux-x64\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\nacho\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.12, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.12, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.linux-x64",
+              "version": "[6.0.15, 6.0.15]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "linux-x64": {
+          "#import": []
+        }
+      }
+    }
+  }
+}
